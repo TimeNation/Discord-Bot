@@ -17,11 +17,11 @@ public class SoicalMediaCommand extends ListenerAdapter {
         if(event.getOption("option") != null && event.getOption("option").getAsString().equalsIgnoreCase("socialmedia")) {
             EmbedBuilder embedBuilder = new EmbedBuilder();
 
-            embedBuilder.setTitle(":mobile_phone: | Social Media");
+            embedBuilder.setTitle("> Social Media Kanäle von TimeNation :mobile_phone:");
             embedBuilder.setDescription("Hey " + event.getMember().getAsMention() + "! \n \n **Dies ist die Liste, von allen Social Media Kanälen vom TimeNation Netzwerk.** \n " +
                     "»» **Twitter** | https://www.twitter.com/TimeNationNET \n " +
                     "»» **YouTube** | https://www.youtube.com/channel/UC5IC_t6OsrULJfVVxQcV0Tg \n " +
-                    "»» **TikTok** | https://www.tiktok.com/@timenationnet");
+                    "»» **TikTok** | https://www.tiktok.com/@timenationnetzwerk");
             embedBuilder.setFooter("TimeNation System by TimeNation (ByRaudy)", "https://cdn.discordapp.com/attachments/819892883711983618/868052405298790401/TimeNation-Avatar.png");
 
             event.replyEmbeds(embedBuilder.build()).complete().deleteOriginal().queueAfter(30, TimeUnit.SECONDS);

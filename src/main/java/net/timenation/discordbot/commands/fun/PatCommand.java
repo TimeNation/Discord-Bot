@@ -22,7 +22,7 @@ public class PatCommand extends ListenerAdapter {
             if(event.getOption("user") != null) {
                 EmbedBuilder embedBuilder = new EmbedBuilder();
 
-                embedBuilder.setTitle(":pleading_face: | Pat");
+                embedBuilder.setTitle("> Pat :pleading_face:");
                 embedBuilder.setDescription("Hey " + event.getOption("user").getAsUser().getAsMention() + "! " + event.getMember().getAsMention() + " hat dir deinen Kopf getätschelt.");
                 embedBuilder.setImage(getLink().get("link").getAsString());
                 embedBuilder.setFooter("TimeNation System by TimeNation (ByRaudy)", "https://cdn.discordapp.com/attachments/819892883711983618/868052405298790401/TimeNation-Avatar.png");
@@ -31,7 +31,7 @@ public class PatCommand extends ListenerAdapter {
             } else {
                 EmbedBuilder embedBuilder = new EmbedBuilder();
 
-                embedBuilder.setTitle("<:poop_error:960196672921698305> | Error");
+                embedBuilder.setTitle("> Fehler <:poop_error:960196672921698305>");
                 embedBuilder.setColor(new Color(156, 0, 0));
                 embedBuilder.setDescription("Hey " + event.getUser().getAsMention() + "! \n \n Du hast den /pat Command falsch benutzt! Bitte benutze diesen wie folgt: \n »» /pat <user>");
                 embedBuilder.setFooter("TimeNation System by TimeNation (ByRaudy)", "https://cdn.discordapp.com/attachments/819892883711983618/868052405298790401/TimeNation-Avatar.png");

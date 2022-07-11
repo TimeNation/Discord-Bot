@@ -17,7 +17,7 @@ public class MembersCommand extends ListenerAdapter {
         if(event.getOption("option") != null && event.getOption("option").getAsString().equalsIgnoreCase("members")) {
             EmbedBuilder embedBuilder = new EmbedBuilder();
 
-            embedBuilder.setTitle("<:timenation_logo:960192143195013141> | Members");
+            embedBuilder.setTitle("> Mitglieder <:timenation_logo:960192143195013141>");
             embedBuilder.setDescription("Hey " + event.getMember().getAsMention() + "! \n \n Der TimeNation Discord hat **" + DiscordBOT.getInstance().getJda().getUsers().size() + "** User.");
             embedBuilder.setFooter("TimeNation System by TimeNation (ByRaudy)", "https://cdn.discordapp.com/attachments/819892883711983618/868052405298790401/TimeNation-Avatar.png");
 

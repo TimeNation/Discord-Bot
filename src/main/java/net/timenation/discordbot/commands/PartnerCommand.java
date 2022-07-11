@@ -18,7 +18,7 @@ public class PartnerCommand extends ListenerAdapter {
         if(event.getOption("option") != null && event.getOption("option").getAsString().equalsIgnoreCase("partner")) {
             EmbedBuilder embedBuilder = new EmbedBuilder();
 
-            embedBuilder.setTitle(":handshake: | Partner");
+            embedBuilder.setTitle("> Unsere Partner :handshake:");
             embedBuilder.setDescription("Hey " + event.getMember().getAsMention() + "! \n \n **Hier sind alle Partner von dem TimeNation Netzwerk gelistet.** \n " +
                     "<:virtualclient:960543029641510942> »» VirtualClient | Minecraft Client \n <:venocix:853385126489882644> »» Venocix | Server Hosting");
             embedBuilder.setFooter("TimeNation System by TimeNation (ByRaudy)", "https://cdn.discordapp.com/attachments/819892883711983618/868052405298790401/TimeNation-Avatar.png");

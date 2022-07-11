@@ -13,7 +13,7 @@ public class TimeNationCommand extends ListenerAdapter {
         if(event.getName().equals("timenation") && event.getOption("option") == null) {
             EmbedBuilder embedBuilder = new EmbedBuilder();
 
-            embedBuilder.setTitle(":books: | Hilfe");
+            embedBuilder.setTitle("> Hilfe :books:");
             embedBuilder.setDescription("\n Hey " + event.getMember().getAsMention() + "! \n Du brauchst Hilfe? Gar kein Problem! \n \n " +
                     "**Nützliche Commands:** \n »» **/timenation help** | Liste von allen Commands. \n »» **/timenation partner** | Liste von allen Partnern." +
                     "\n »» **/timenation socialmedia** | Liste aller Social Media Kanäle von TimeNation. \n »» **/timenation members** | Zeige, wie viele User auf dem TimeNation Discord sind." +

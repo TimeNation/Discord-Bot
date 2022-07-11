@@ -7,6 +7,7 @@ import net.timenation.discordbot.DiscordBOT;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,11 +29,15 @@ public class RabbitMQManager {
         this.channel.queueDeclare("discord-bot", false, false, true, null);
         this.channel.queueBind("discord-bot", "discord-status", "");
 
+        this.channel.exchangeDeclare("minecraft-network", "fanout", false, true, null);
+        this.channel.queueDeclare("minecraft-reports", false, false, true, null);
+        this.channel.queueBind("minecraft-reports", "minecraft-network", "");
+
         startListeningToRabbitMQ();
     }
 
-    public void sendMessageToRabbitMQ(String message) throws IOException {
-        this.channel.basicPublish("discord-status", "", false, null, message.getBytes());
+    public void sendMessageToRabbitMQ(String exchange, String message) throws IOException {
+        this.channel.basicPublish(exchange, "", false, null, message.getBytes());
     }
 
     public void startListeningToRabbitMQ() throws IOException {
@@ -40,7 +45,7 @@ public class RabbitMQManager {
 
         this.channel.basicConsume("discord-bot", true, (consumerTag, message) -> {
             EmbedBuilder embedBuilder = new EmbedBuilder();
-            embedBuilder.setTitle("<:timenation_logo:960192143195013141> | Status");
+            embedBuilder.setTitle("> Aktueller Status <:timenation_logo:960192143195013141>");
             embedBuilder.addField("States", "\uD83D\uDD34 »» Offline \n \uD83D\uDFE2 »» Online \n ⚠️ »» Wartungsarbeiten", false);
 
             switch (new String(message.getBody())) {
@@ -57,6 +62,16 @@ public class RabbitMQManager {
                     DiscordBOT.getInstance().getJda().getTextChannelById("960505125489762327").editMessageEmbedsById("960505181668266044", embedBuilder.build()).queue();
                 }
             }
+        }, consumerTag -> {});
+
+        this.channel.basicConsume("minecraft-reports", true, (consumerTag, message) -> {
+            String[] information = new String(message.getBody()).split(", ");
+            EmbedBuilder embedBuilder = new EmbedBuilder();
+
+            embedBuilder.setTitle("> Es wurde ein Spieler gemeldet. \uD83D\uDCEF");
+            embedBuilder.setDescription("\n \n > **Informationen zum Report** \n Gemeldet: **" + information[0] + "** \n Von: **" + information[1] + "** \n Grund: **" + information[2] + "** \n ID: **" + information[3] + "** \n \n > **Datum & Uhrzeit** \n Datum: **" + new SimpleDateFormat("dd.MM.yyyy").format(new Date().getTime()) + "** \n Uhrzeit: **" + new SimpleDateFormat("HH:mm:ss").format(new Date().getTime()) + "**");
+
+            DiscordBOT.getInstance().getJda().getGuildById("971563406635171910").getTextChannelById("993147386601938954").sendMessageEmbeds(embedBuilder.build()).queue();
         }, consumerTag -> {});
     }
 

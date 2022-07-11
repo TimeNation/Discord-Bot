@@ -116,7 +116,6 @@ public class DiscordBOT {
     }
 
     public void instantShutdown(JDA jda) throws IOException, InterruptedException {
-        rabbitMQManager.sendMessageToRabbitMQ("ticketsystem_offline");
         Thread.sleep(2000);
         jda.getPresence().setStatus(OnlineStatus.OFFLINE);
         jda.shutdown();

@@ -63,10 +63,10 @@ public class TicketManager {
         channel.putPermissionOverride(event.getMember()).setAllow(Permission.VIEW_CHANNEL, Permission.MESSAGE_WRITE).queue();
 
         switch (ticketType) {
-            case QUESTION -> embedBuilder.setTitle("<:timenation_logo:960192143195013141> | Network Question");
-            case TEAMAPPLY -> embedBuilder.setTitle("<:apply:960197085616037959> | Team apply");
-            case VIPAPPLY -> embedBuilder.setTitle("<:apply_vip:960204240771481710> | VIP apply");
-            case BUG_REPORT -> embedBuilder.setTitle("<:poop_error:960196672921698305> | Bug report");
+            case QUESTION -> embedBuilder.setTitle("> Frage wegen des TimeNation Netzwerkes <:timenation_logo:960192143195013141>");
+            case TEAMAPPLY -> embedBuilder.setTitle("> Bewerben als Teammitglied <:apply:960197085616037959>");
+            case VIPAPPLY -> embedBuilder.setTitle("> Bewerben als VIP(YouTuber/Streamer) <:apply_vip:960204240771481710>");
+            case BUG_REPORT -> embedBuilder.setTitle("> Bug melden <:poop_error:960196672921698305>");
         }
         embedBuilder.setDescription("**Willkommen im Ticket von " + event.getMember().getAsMention() + ".** \n \n **Ticketoptionen:** \n ✅ »» Schließe das Ticket (Nur Teammitglieder) \n ⚠ »» Ticket weiterleiten (Nur Teammitglieder)");
         embedBuilder.setFooter("TimeBot by TimeNation (ByRaudy)", "https://cdn.discordapp.com/attachments/819892883711983618/868052405298790401/TimeNation-Avatar.png");
@@ -77,7 +77,7 @@ public class TicketManager {
 
     public void setForwartTicket(ButtonClickEvent event, TextChannel channel) {
         EmbedBuilder embedBuilder = new EmbedBuilder();
-        embedBuilder.setTitle("⚠ | Ticket weiterleitet");
+        embedBuilder.setTitle("> Das Ticket wurde weiterleitet. ⚠");
         embedBuilder.setDescription("**Das Ticket wurde von " + event.getMember().getAsMention() + " weiterleitet.** \n \n **Letzte Ticketoption:** \n ✅ »» Schließe das Ticket (Nur Owner/Admin)");
         embedBuilder.setFooter("TimeBot by TimeNation (ByRaudy)", "https://cdn.discordapp.com/attachments/819892883711983618/868052405298790401/TimeNation-Avatar.png");
 
@@ -89,7 +89,7 @@ public class TicketManager {
     public void deleteTicket(GenericComponentInteractionCreateEvent event, Member member) {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setColor(Color.RED);
-        embedBuilder.setTitle(":tickets: | Ticket geschlossen");
+        embedBuilder.setTitle("> Das Ticket wurde geschlossen. :tickets:");
         embedBuilder.setDescription("**Das Ticket wurde von " + member.getAsMention() + " geschlossen.** \n \n **Das Ticket wird in 5 Sekunden gelöscht.**");
         embedBuilder.setFooter("TimeBot by TimeNation (ByRaudy)", "https://cdn.discordapp.com/attachments/819892883711983618/868052405298790401/TimeNation-Avatar.png");
         event.replyEmbeds(embedBuilder.build()).queue();
