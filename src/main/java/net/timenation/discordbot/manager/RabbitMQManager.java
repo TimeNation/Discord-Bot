@@ -2,12 +2,11 @@ package net.timenation.discordbot.manager;
 
 import com.rabbitmq.client.*;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.timenation.discordbot.DiscordBOT;
+import net.timenation.discordbot.DiscordBot;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,15 +50,15 @@ public class RabbitMQManager {
             switch (new String(message.getBody())) {
                 case "minecraft_off" -> {
                     embedBuilder.setDescription("\uD83D\uDD34 **»» Minecraft Netzwerk** \n \n  Letzte Änderung: **" + new SimpleDateFormat("HH:mm:ss | dd.MM.yyyy").format(new Date().getTime()) + "**");
-                    DiscordBOT.getInstance().getJda().getTextChannelById("960505125489762327").editMessageEmbedsById("960505181668266044", embedBuilder.build()).queue();
+                    DiscordBot.getInstance().getJda().getTextChannelById("960505125489762327").editMessageEmbedsById("960505181668266044", embedBuilder.build()).queue();
                 }
                 case "minecraft_on" -> {
                     embedBuilder.setDescription("\uD83D\uDFE2 **»» Minecraft Netzwerk** \n \n Letzte Änderung: **" + new SimpleDateFormat("HH:mm:ss | dd.MM.yyyy").format(new Date().getTime()) + "**");
-                    DiscordBOT.getInstance().getJda().getTextChannelById("960505125489762327").editMessageEmbedsById("960505181668266044", embedBuilder.build()).queue();
+                    DiscordBot.getInstance().getJda().getTextChannelById("960505125489762327").editMessageEmbedsById("960505181668266044", embedBuilder.build()).queue();
                 }
                 case "minecraft_maintenance" -> {
                     embedBuilder.setDescription("⚠️ **»» Minecraft Netzwerk** \n \n Letzte Änderung: **" + new SimpleDateFormat("HH:mm:ss | dd.MM.yyyy").format(new Date().getTime()) + "**");
-                    DiscordBOT.getInstance().getJda().getTextChannelById("960505125489762327").editMessageEmbedsById("960505181668266044", embedBuilder.build()).queue();
+                    DiscordBot.getInstance().getJda().getTextChannelById("960505125489762327").editMessageEmbedsById("960505181668266044", embedBuilder.build()).queue();
                 }
             }
         }, consumerTag -> {});
@@ -71,7 +70,7 @@ public class RabbitMQManager {
             embedBuilder.setTitle("> Es wurde ein Spieler gemeldet. \uD83D\uDCEF");
             embedBuilder.setDescription("\n \n > **Informationen zum Report** \n Gemeldet: **" + information[0] + "** \n Von: **" + information[1] + "** \n Grund: **" + information[2] + "** \n ID: **" + information[3] + "** \n \n > **Datum & Uhrzeit** \n Datum: **" + new SimpleDateFormat("dd.MM.yyyy").format(new Date().getTime()) + "** \n Uhrzeit: **" + new SimpleDateFormat("HH:mm:ss").format(new Date().getTime()) + "**");
 
-            DiscordBOT.getInstance().getJda().getGuildById("971563406635171910").getTextChannelById("993147386601938954").sendMessageEmbeds(embedBuilder.build()).queue();
+            DiscordBot.getInstance().getJda().getGuildById("971563406635171910").getTextChannelById("993147386601938954").sendMessageEmbeds(embedBuilder.build()).queue();
         }, consumerTag -> {});
     }
 

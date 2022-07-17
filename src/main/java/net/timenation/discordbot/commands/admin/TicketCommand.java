@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.Button;
-import net.timenation.discordbot.DiscordBOT;
+import net.timenation.discordbot.DiscordBot;
 
 import java.awt.*;
 
@@ -21,7 +21,7 @@ public class TicketCommand extends ListenerAdapter {
         if (event.isFromType(ChannelType.TEXT)) {
             if (event.getMember().hasPermission(Permission.ADMINISTRATOR)) {
                 if (message.startsWith("!sendticketembed")) {
-                    channel.purgeMessages(DiscordBOT.get(channel, 0));
+                    channel.purgeMessages(DiscordBot.get(channel, 0));
                     EmbedBuilder embedBuilder = new EmbedBuilder();
 
                     embedBuilder.setTitle("> Ticket-System :tickets:");

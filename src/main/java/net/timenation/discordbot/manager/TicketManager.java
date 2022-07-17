@@ -6,10 +6,9 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.events.interaction.GenericComponentInteractionCreateEvent;
 import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
-import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.interactions.components.Button;
 import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
-import net.timenation.discordbot.DiscordBOT;
+import net.timenation.discordbot.DiscordBot;
 import net.timenation.discordbot.manager.tickettype.TicketType;
 
 import java.awt.*;
@@ -17,7 +16,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.EnumSet;
 import java.util.concurrent.TimeUnit;
 
@@ -104,7 +102,7 @@ public class TicketManager {
         embedBuilder.setTitle("> Es wurde ein Ticket eröffnet. :inbox_tray:");
         embedBuilder.setDescription(member.getAsMention() + " hat ein Ticket am " + date.format(LocalDateTime.now()) + " um " + clock.format(LocalDateTime.now()) + " eröffnet.");
         embedBuilder.setFooter("TimeBot by TimeNation (ByRaudy)", "https://cdn.discordapp.com/attachments/819892883711983618/868052405298790401/TimeNation-Avatar.png");
-        DiscordBOT.getInstance().getJda().getTextChannelById("854101835174772768").sendMessageEmbeds(embedBuilder.build()).queue();
+        DiscordBot.getInstance().getJda().getTextChannelById("854101835174772768").sendMessageEmbeds(embedBuilder.build()).queue();
     }
 
     public void sendClosedTicketLogEmbed(Member member, TextChannel textChannel) {
@@ -113,7 +111,7 @@ public class TicketManager {
         embedBuilder.setDescription(member.getAsMention() + " hat das Ticket '#" + textChannel.getName() + "' am " + date.format(LocalDateTime.now()) + " um " + clock.format(LocalDateTime.now()) + " geschlossen.");
         embedBuilder.setFooter("TimeBot by TimeNation (ByRaudy)", "https://cdn.discordapp.com/attachments/819892883711983618/868052405298790401/TimeNation-Avatar.png");
 
-        DiscordBOT.getInstance().getJda().getTextChannelById("854101835174772768").sendMessageEmbeds(embedBuilder.build()).queue();
+        DiscordBot.getInstance().getJda().getTextChannelById("854101835174772768").sendMessageEmbeds(embedBuilder.build()).queue();
     }
 
     public ArrayList<Member> getMemberList() {
