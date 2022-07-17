@@ -53,7 +53,7 @@ public class DiscordBot {
 //        } catch (IOException | TimeoutException exception) {
 //            exception.printStackTrace();
 //        }
-        JDABuilder builder = JDABuilder.create(timeConfig.getBotToken(),
+        JDABuilder builder = JDABuilder.createDefault(timeConfig.getBotToken(),
                 GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_EMOJIS,
                 GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_VOICE_STATES);
 
