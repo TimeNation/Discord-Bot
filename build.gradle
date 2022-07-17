@@ -35,6 +35,12 @@ tasks.withType(JavaCompile).configureEach {
     }
 }
 
+tasks {
+    build {
+        dependsOn(shadowJar)
+    }
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'net.timenation.discordbot.DiscordBot'
