@@ -37,6 +37,6 @@ tasks.withType(JavaCompile).configureEach {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'net.timenation.discordbot.DiscordBOT'
+        attributes 'Main-Class': 'net.timenation.discordbot.DiscordBot'
     }
 }
