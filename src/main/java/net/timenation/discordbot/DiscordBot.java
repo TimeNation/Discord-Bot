@@ -14,6 +14,7 @@ import net.timenation.discordbot.commands.admin.SendStatusEmbed;
 import net.timenation.discordbot.commands.fun.HugCommand;
 import net.timenation.discordbot.commands.fun.PatCommand;
 import net.timenation.discordbot.commands.admin.TicketCommand;
+import net.timenation.discordbot.config.TimeConfig;
 import net.timenation.discordbot.listener.MemberJoinEvent;
 import net.timenation.discordbot.listener.TicketReactionManager;
 import net.timenation.discordbot.manager.RabbitMQManager;
@@ -21,6 +22,7 @@ import net.timenation.discordbot.manager.TicketManager;
 
 import javax.security.auth.login.LoginException;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -29,11 +31,12 @@ import java.util.concurrent.TimeoutException;
 
 public class DiscordBot {
 
+    private final TimeConfig timeConfig = TimeConfig.loadConfig(new File("config.json"));
+
     public static DiscordBot instance;
     private final JDA jda;
     private final TicketManager ticketManager;
     private RabbitMQManager rabbitMQManager;
-    private static boolean shutdown = false;
 
     public static void main(String[] args) {
         try {
@@ -50,7 +53,7 @@ public class DiscordBot {
 //        } catch (IOException | TimeoutException exception) {
 //            exception.printStackTrace();
 //        }
-        JDABuilder builder = JDABuilder.create("OTk4MjUyOTc2MDA5NDAwMzMx.G2cAb4.Haqx76O-hm-yQX5CSsMPBSuEb18pgWbe0y4v20",
+        JDABuilder builder = JDABuilder.create(timeConfig.getBotToken(),
                 GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_EMOJIS,
                 GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_VOICE_STATES);
 
@@ -71,6 +74,10 @@ public class DiscordBot {
 
         System.out.println("The TimeBOT is now online. (TimeBot by TimeNation (ByRaudy))");
 //        shutdown();
+    }
+
+    public TimeConfig getTimeConfig() {
+        return timeConfig;
     }
 
     public static DiscordBot getInstance() {
@@ -96,7 +103,6 @@ public class DiscordBot {
             try {
                 while ((line = reader.readLine()) != null) {
                     if (line.equalsIgnoreCase("shutdown") || line.equalsIgnoreCase("stop")) {
-                        shutdown = true;
                         if (jda != null) {
                             sendShutdownEmbed(jda);
                             jda.getPresence().setStatus(OnlineStatus.OFFLINE);
